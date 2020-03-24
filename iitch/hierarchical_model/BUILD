@@ -25,7 +25,7 @@ py_library(
     ],
     srcs_version = "PY2AND3",
     deps = [
-        "//third_party/py/google/cloud/bigquery:bigquery_future",
+        "//third_party/py/google/cloud/bigquery",
         requirement("numpy"),
         requirement("pandas"),
         requirement("scipy"),
