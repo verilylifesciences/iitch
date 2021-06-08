@@ -28,7 +28,7 @@ import collections
 
 import numpy as np
 from six.moves import range
-import tensorflow.compat.v1 as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_probability as tfp
 
 tfd = tfp.distributions
@@ -158,14 +158,14 @@ class MosquitoTrapModelv1(object):
                obs_data,
                prior_parameters,
                validate_args=False):
-    with tf.variable_scope('', reuse=tf.AUTO_REUSE):
+    with tf.compat.v1.variable_scope('', reuse=tf.compat.v1.AUTO_REUSE):
       self.validate_args = validate_args
       self.dtype = np.float32
       self.obs_data = obs_data
       self.prior_parameters = prior_parameters
       self.make_prior()
       self.make_unconstraining_bijectors()
-      self.joint_log_prob = tf.make_template(
+      self.joint_log_prob = tf.compat.v1.make_template(
           name_='joint_log_prob', func_=self._joint_log_prob)
 
   def make_prior(self):
@@ -262,7 +262,7 @@ class MosquitoTrapModelv1(object):
         tf.tile(dispersion_coeffs, tf.constant([num_locations])),
         (num_locations, num_locations))
     disp_matrix = tf.exp(-(squared_dist_matrix / divisor))
-    row_sums = tf.reshape(tf.reduce_sum(disp_matrix, axis=1), (-1, 1))
+    row_sums = tf.reshape(tf.reduce_sum(input_tensor=disp_matrix, axis=1), (-1, 1))
     disp_matrix = tf.divide(disp_matrix, row_sums)
     return disp_matrix
 
@@ -551,9 +551,9 @@ class MosquitoTrapModelv1(object):
 
     log_prob_parts.extend([
         tf.reshape(
-            rv_male_abundance.log_prob(tf.transpose(male_abundances)), [-1]),
+            rv_male_abundance.log_prob(tf.transpose(a=male_abundances)), [-1]),
         tf.reshape(
-            rv_female_abundance.log_prob(tf.transpose(female_abundances)), [-1])
+            rv_female_abundance.log_prob(tf.transpose(a=female_abundances)), [-1])
     ])
 
     log_prob_parts.extend([
@@ -561,7 +561,7 @@ class MosquitoTrapModelv1(object):
         rv_female_observations.log_prob(self.obs_data.f_counts)
     ])
 
-    sum_log_prob = tf.reduce_sum(tf.concat(log_prob_parts, axis=-1), axis=-1)
+    sum_log_prob = tf.reduce_sum(input_tensor=tf.concat(log_prob_parts, axis=-1), axis=-1)
     return sum_log_prob
 
   def convert_tensor_to_parameters(self, parameter_tensor):
