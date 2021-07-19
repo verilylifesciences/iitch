@@ -1,3 +1,4 @@
+# Lint as: python2, python3
 # Copyright 2019 Verily Life Sciences LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +20,7 @@ from __future__ import print_function
 
 
 import numpy as np
+from six.moves import range
 
 
 class EnvironmentModel(object):

@@ -22,9 +22,12 @@ import collections
 import datetime
 
 
+
 import numpy as np
 import pandas as pd
 import scipy
+from six.moves import zip
+
 from google.cloud import bigquery
 
 ObservedData = collections.namedtuple('ObservedData', [
@@ -254,7 +257,7 @@ def generate_observation_data(trap_data,
   # for each observation during model fitting.
   obs_location_to_id = {}
   i = 0
-  t_idx = zip(t, idx)
+  t_idx = list(zip(t, idx))
   for (curr_t, curr_idx) in t_idx:
     if (curr_t, curr_idx) not in obs_location_to_id:
       obs_location_to_id[(curr_t, curr_idx)] = i

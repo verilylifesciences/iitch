@@ -22,9 +22,11 @@ py_library(
         "animation.py",
         "mosquito_abm.py",
     ],
+    srcs_version = "PY2AND3",
     deps = [
         requirement("matplotlib"),
         requirement("numpy"),
         requirement("scipy"),
+        requirement("six"),
     ],
 )
