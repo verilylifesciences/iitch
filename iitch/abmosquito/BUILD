@@ -14,7 +14,7 @@
 
 # Agent based modeling of mosquito population and animations
 
-licenses(["notice"])  # Apache License 2.0
+licenses(["notice"])
 
 py_library(
     name = "abmosquito",
