@@ -14,6 +14,15 @@
 
 load("@pipdeps//:requirements.bzl", "requirement")
 
+load("//tools/build_defs/license:license.bzl", "license")
+
+package(default_applicable_licenses = ["//third_party/py/iitch:license"])
+
+license(
+    name = "license",
+    package_name = "iitch",
+)
+
 licenses(["notice"])
 
 exports_files(["LICENSE"])
