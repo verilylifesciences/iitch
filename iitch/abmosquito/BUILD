@@ -14,6 +14,8 @@
 
 # Agent based modeling of mosquito population and animations
 
+load("//tools/build_defs/build_test:build_test.bzl", "build_test")
+
 licenses(["notice"])
 
 py_library(
@@ -29,4 +31,9 @@ py_library(
         requirement("scipy"),
         requirement("six"),
     ],
+)
+
+build_test(
+    name = "abmosquito_build_test",
+    targets = [":abmosquito"],
 )
