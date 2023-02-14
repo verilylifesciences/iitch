@@ -16,6 +16,8 @@
 
 load("//tools/build_defs/build_test:build_test.bzl", "build_test")
 
+package(default_applicable_licenses = ["//third_party/py/iitch:license"])
+
 licenses(["notice"])  # Apache License 2.0
 
 py_library(
