@@ -14,7 +14,11 @@
 
 # Agent based modeling of mosquito population and animations
 
-licenses(["notice"])  # Apache License 2.0
+load("//tools/build_defs/build_test:build_test.bzl", "build_test")
+
+package(default_applicable_licenses = ["//third_party/py/iitch:license"])
+
+licenses(["notice"])
 
 py_library(
     name = "abmosquito",
@@ -29,4 +33,9 @@ py_library(
         requirement("scipy"),
         requirement("six"),
     ],
+)
+
+build_test(
+    name = "abmosquito_build_test",
+    targets = [":abmosquito"],
 )

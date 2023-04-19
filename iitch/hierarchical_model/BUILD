@@ -14,6 +14,10 @@
 
 # Implementation of a hierarchical population dispersion model.
 
+load("//tools/build_defs/build_test:build_test.bzl", "build_test")
+
+package(default_applicable_licenses = ["//third_party/py/iitch:license"])
+
 licenses(["notice"])  # Apache License 2.0
 
 py_library(
@@ -33,4 +37,9 @@ py_library(
         requirement("tensorflow"),
         requirement("tensorflow_probability"),
     ],
+)
+
+build_test(
+    name = "hierarchical_model_build_test",
+    targets = [":hierarchical_model"],
 )
